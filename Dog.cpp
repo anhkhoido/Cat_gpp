@@ -25,20 +25,6 @@ ostream& Dog::read(ostream& os) const {
 	return os;
 }
 
-Dog::Dog(const Dog& src) {
-	*this = src;
-}
-
-/*Dog& Dog::operator=(const Dog& src) {
-	if (this != &src) {
-		name = src.name;
-		breed = src.breed;
-		age = src.age;
-	}
-	return *this;
-}*/
-
-
 //======================================
 // Non-member helper operators.
 //======================================
