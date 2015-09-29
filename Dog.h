@@ -27,18 +27,6 @@ class Dog {
 		//=====================//
 		ostream& read(ostream&) const;
 
-		//====================//
-		// Copy constructor.  //
-		//====================//
-		Dog(const Dog&);
-
-
-
-		//=====================//
-		// Assignment operator //
-		//=====================//
-	//	Dog& operator=(const Dog&);
-
 
 }; // End of the class.
 
