@@ -1,34 +1,44 @@
 //
-// File's name: Client.cpp
-// Author: Anh Khoi Do
+// File's name: .cpp
+// Author: Dan Brennan
 // Date: 09/28/2015
 //
 // Description: The client that calls
-// the cat and any other objects. This file
+// the Dog and any other objects. This file
 // contains the main function of the program.
 //==============================================
 
 #include <iostream>
-#include "Cat.h"
+#include "Dog.h"
 
 int main() {
 
-	Cat harry;
+	string nm, br;
+	int a;
 
-	std::cout << "The Cat Customizer\n" << std::endl;
-	
-	//========================//
-	// Input data for the cat.//
-	//========================//
-	std::cin >> harry;
+	cout << "The Dog Customizer" << endl;
 
-	std::cout << "\nCat\'s fact sheet" << std::endl;
-	std::cout << "---------------------------" << std::endl;
+	cout << "Type the name of your Dog: ";
+	cin >> nm;
+	cout << "Its age: ";
+	cin >> a;
+	cout << "Breed: ";
+	cin >> br;
+
+
+	Dog toto(a, nm, br);
+
+	//========================//
+	// Input data for the Dog.//
+	//========================//
+
+	cout << "\nDog\'s fact sheet" << endl;
+	cout << "---------------------------" << endl;
 
 	//=======================================//
-	// Display the inormation about the cat. //
+	// Display the inormation about the Dog. //
 	//=======================================//
-	std::cout << harry;
+	cout << toto;
 
 
 	return 0;
