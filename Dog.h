@@ -22,6 +22,9 @@ class Dog {
 		Dog(int, const string, const string);
 		~Dog();
 
+		Dog(Dog&);	// copy constructor
+		Dog& operator=(const Dog&);
+
 		//=====================//
 		// Output operator.    //
 		//=====================//

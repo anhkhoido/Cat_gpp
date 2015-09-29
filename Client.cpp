@@ -17,7 +17,6 @@ int main() {
 	int a;
 
 	cout << "The Dog Customizer" << endl;
-
 	cout << "Type the name of your Dog: ";
 	cin >> nm;
 	cout << "Its age: ";
@@ -26,13 +25,20 @@ int main() {
 	cin >> br;
 
 
-	Dog toto(a, nm, br);
+	Dog toto(a, nm, br); // Constructor
+
+	Dog cat(toto);
+
+	Dog roof;
+
+	roof = cat;
+
 
 	//========================//
 	// Input data for the Dog.//
 	//========================//
 
-	cout << "\nDog\'s fact sheet" << endl;
+	cout << "\nToto\'s fact sheet" << endl;
 	cout << "---------------------------" << endl;
 
 	//=======================================//
@@ -40,6 +46,14 @@ int main() {
 	//=======================================//
 	cout << toto;
 
+	cout << "\nRoof\'s fact sheet\n";
+	cout << "---------------------------" << endl;
+	cout << roof;
+
+	cout << "\nCat\'s fact sheet" << endl;
+	cout << "---------------------------" << endl;
+
+	cout << cat;
 
 	return 0;
 }
