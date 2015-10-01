@@ -19,9 +19,16 @@ class Dog {
 
 	public:
 		Dog();
-		Dog(int, const string, const string);
 		~Dog();
 
+		void setName(const string);
+		void setBreed(const string);
+		void setAge(const int);
+
+	/*	string getName();
+		string getBreed();
+		int getAge();
+*/
 		Dog(Dog&);	// copy constructor
 		Dog& operator=(const Dog&);
 
@@ -29,7 +36,7 @@ class Dog {
 		// Output operator.    //
 		//=====================//
 		ostream& read(ostream&) const;
-
+		istream& write(istream& is);
 
 }; // End of the class.
 
@@ -37,3 +44,4 @@ class Dog {
 // Non-member output operator.    //
 //================================//
 ostream& operator<<(ostream&, const Dog&);
+istream& operator>>(istream&, Dog&);

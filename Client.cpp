@@ -13,19 +13,9 @@
 
 int main() {
 
-	string nm, br;
-	int a;
+	Dog toto; // Constructor
 
-	cout << "The Dog Customizer" << endl;
-	cout << "Type the name of your Dog: ";
-	cin >> nm;
-	cout << "Its age: ";
-	cin >> a;
-	cout << "Breed: ";
-	cin >> br;
-
-
-	Dog toto(a, nm, br); // Constructor
+	cin >> toto;
 
 	Dog cat(toto);
 

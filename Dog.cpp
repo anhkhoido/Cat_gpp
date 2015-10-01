@@ -8,21 +8,40 @@
 //===========================================================================
 
 #include "Dog.h"
-
-Dog::Dog() {
-		age = 0;
-}
-
-Dog::Dog(int a, const string n, const string b) :name(n), breed(b) {
-	if (a > 0)
-		age = a;
-}
-
+Dog::Dog() {}
 Dog::~Dog() {}
 
+void Dog::setName(const string n) {
+	name = n;
+}
+void Dog::setBreed(const string b) {
+	breed = b;
+}
+void Dog::setAge(const int a) {
+	age = a;
+}
+
 ostream& Dog::read(ostream& os) const {
-	os << "Name: " << name << ", Age: " << age << ", Breed: " << breed << "\n";
+	os << "Name: " << name;
+	os << ", Age: " << age;
+	os << ", Breed: " << breed << "\n";
 	return os;
+}
+
+istream& Dog::write(istream& is) {
+	int a;
+	string na, br;
+
+	std::cout << "What is the name of your Dog: ";
+	is >> na;
+	setName(na);
+	std::cout << "Its age: ";
+	is >> a;
+	setAge(a);
+	std::cout << "Breed: ";
+	is >> br;
+	setBreed(br);
+	return is;
 }
 
 Dog::Dog(Dog& rhs) {
@@ -44,4 +63,9 @@ Dog& Dog::operator=(const Dog& rhs) {
 ostream& operator<<(ostream& os, const Dog& src) {
 	src.read(os);
 	return os;
+}
+
+istream& operator>>(istream& is, Dog& src) {
+	src.write(is);
+	return is;
 }
