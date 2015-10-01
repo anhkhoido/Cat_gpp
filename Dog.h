@@ -25,10 +25,6 @@ class Dog {
 		void setBreed(const string);
 		void setAge(const int);
 
-	/*	string getName();
-		string getBreed();
-		int getAge();
-*/
 		Dog(Dog&);	// copy constructor
 		Dog& operator=(const Dog&);
 
