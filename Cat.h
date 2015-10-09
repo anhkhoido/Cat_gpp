@@ -5,7 +5,15 @@
 //
 // Description: Definition of a class that
 // refers to a cat and its attributes.
-//===========================================
+//
+// Revision history:
+// 
+// Name            Date          Version     Reason(s)
+// Anh Khoi Do     09/28/2015    1           Creation of the file.
+//
+// Anh Khoi Do     09/10/2015    2           Addition of a move copy constructor
+//                                           and a move assignment operator.
+//=======================================================================================
 
 #include <iostream>
 #include <string>
