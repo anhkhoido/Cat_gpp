@@ -5,9 +5,15 @@
 //
 // Description: Implementation file of a class that refers to a cat.
 // The latter was defined in a header file called Cat.h.
-//===========================================================================
-
-
+//
+// Revision history:
+// 
+// Name            Date          Version     Reason(s)
+// Anh Khoi Do     09/28/2015    1           Creation of the file.
+//
+// Anh Khoi Do     09/10/2015    2           Addition of a move copy constructor
+//                                           and a move assignment operator.
+//======================================================================================
 
 #include "Cat.h"
 #include <cstring>
@@ -109,6 +115,37 @@ Cat& Cat::operator=(Cat& src) {
 		setTheCat(src.age, src.name, src.breed);
 	}
 
+	return *this;
+}
+
+
+Cat::Cat(Cat&& src) {
+	this->age = src.age;
+	strcpy(this->name, src.name);
+	this->breed = src.breed;
+	
+	src.age = 0;
+	src.name[0] = '\0';
+	src.breed = NULL;
+}
+
+Cat& Cat::operator=(Cat&& src) {
+	if (this != &src) {
+		if (this->breed != NULL) {
+			delete[] this->breed;
+			this->age = 0;
+			this->name[0] = '\0';
+		} // End of the nested if statement.
+		
+		this->age = src.age;
+		strcpy(this->name, src.name);
+		this->breed = src.breed;
+		
+		src.age = 0;
+		src.name = '\0';
+		src.breed = NULL;
+	} // End of the if statement.
+	
 	return *this;
 }
 
