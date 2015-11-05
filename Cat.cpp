@@ -13,6 +13,12 @@
 //
 // Anh Khoi Do     09/10/2015    2           Addition of a move copy constructor
 //                                           and a move assignment operator.
+//
+// Anh Khoi Do     11/05/2015    3           Removal of the setter in the copy
+//					     constructor, assignment operator, move
+//                                           copy constructor and move assignment
+//                                           operator. All of these now send the data
+//                                           of their parameter to pointer *this.
 //======================================================================================
 
 #include "Cat.h"
@@ -24,24 +30,25 @@
 Cat::Cat() {
 	age = 0;
 	name[0] = '\0';
-	breed = NULL;
+	breed = nullptr;
 }
 
 Cat::Cat(int a, const char* n, const char* b) {
 
 	breed = new (std::nothrow) char[strlen(b) + 1];
-	if (a != 0 && n != NULL && b != NULL) {
+	
+	if (a != 0 && n != NULL && b != nullptr) {
 		age = a;
 		strncpy(name, n, MAX_SIZE + 1);
 		strcpy(breed, b);
-	}
+	} else *this = Cat();
 
 }
 
 
 Cat::~Cat() {
 	delete[] breed;
-	breed = NULL;	
+	breed = nullptr;	
 }
 
 bool operator!=(const Cat& left, const Cat& right) {
@@ -107,12 +114,24 @@ std::istream& Cat::write(std::istream& is) {
 
 
 Cat::Cat(const Cat& src) {
-	setTheCat(src.getAge(), src.getName(), src.getBreed());
+	
+	this->age = src.age;
+	
+	strcpy(this->name, src.name);
+	
+	this->breed = new (std::nothrow) char[strlen(src.breed) + 1];
+	strcpy(this->breed, src.breed);
+	
 }
 
 Cat& Cat::operator=(Cat& src) {
 	if (this != &src) {
-		setTheCat(src.age, src.name, src.breed);
+		this->age = src.age;
+	
+		strcpy(this->name, src.name);
+	
+		this->breed = new (std::nothrow) char[strlen(src.breed) + 1];
+		strcpy(this->breed, src.breed);
 	}
 
 	return *this;
@@ -122,16 +141,18 @@ Cat& Cat::operator=(Cat& src) {
 Cat::Cat(Cat&& src) {
 	this->age = src.age;
 	strcpy(this->name, src.name);
-	this->breed = src.breed;
+	
+	this->breed = new (std::nothrow) char[strlen(src.breed) + 1];
+	strcpy(this->breed, src.breed);
 	
 	src.age = 0;
 	src.name[0] = '\0';
-	src.breed = NULL;
+	src.breed = nullptr;
 }
 
 Cat& Cat::operator=(Cat&& src) {
 	if (this != &src) {
-		if (this->breed != NULL) {
+		if (this->breed != nullptr) {
 			delete[] this->breed;
 			this->age = 0;
 			this->name[0] = '\0';
@@ -139,11 +160,13 @@ Cat& Cat::operator=(Cat&& src) {
 		
 		this->age = src.age;
 		strcpy(this->name, src.name);
-		this->breed = src.breed;
+		
+		this->breed = new (std::nothrow) char[strlen(src.breed) + 1];
+		strcpy(this->breed, src.breed);
 		
 		src.age = 0;
 		src.name = '\0';
-		src.breed = NULL;
+		src.breed = nullptr;
 	} // End of the if statement.
 	
 	return *this;
@@ -173,14 +196,3 @@ std::istream& operator>>(std::istream& is, Cat& src) {
 
 	return is;
 }
-
-bool operator==(const Cat& left, const Cat& right) {
-	bool condition;
-
-	if (left.getAge() == right.getAge() && left.getName() == right.getName() && left.getBreed() == right.getBreed()) {
-		condition = true;
-	} else {
-		condition = false;
-	}
-	return condition;
-} // End of the comparison operator.
