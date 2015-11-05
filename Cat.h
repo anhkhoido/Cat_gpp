@@ -88,6 +88,3 @@ std::ostream& operator<<(std::ostream&, const Cat&);
 // Non-member input operator   //
 //=============================//
 std::istream& operator>>(std::istream&, Cat&);
-
-bool operator!=(const Cat&, const Cat&);
-bool operator==(const Cat&, const Cat&);
