@@ -17,14 +17,13 @@
 
 #include <iostream>
 #include <string>
-#include <cstring>
 
 #define MAX_SIZE 30
 
 class Cat {
-	int age;
-	char name[MAX_SIZE + 1];
-	char *breed;
+	int _age;
+	char _name[MAX_SIZE + 1];
+	char* _breed;
 	
 
 	public:
