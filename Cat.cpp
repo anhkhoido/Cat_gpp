@@ -33,20 +33,31 @@ Cat::Cat() {
 
 Cat::Cat(int a, const char* n, const char* b) {
 
-	_breed = new (std::nothrow) char[strlen(b) + 1];
-
+	
 	if (a != 0 && n != NULL && b != nullptr) {
 		_age = a;
 		strncpy(_name, n, MAX_SIZE + 1);
+		
+		//====================================================//
+		// Dynamically allocate a memory for _breed (char*).  //
+		//====================================================//
+		_breed = new (std::nothrow) char[strlen(b) + 1];
 		strcpy(_breed, b);
-	}
-	else *this = Cat();
+	} else *this = Cat();
 
 }
 
 
 Cat::~Cat() {
+
+	//=====================================//
+	// Delete the value of _breed (char*). //
+	//=====================================//
 	delete[] _breed;
+
+	//========================================//
+	// Reset the value of _breed to nullptr.  //
+	//========================================//
 	_breed = nullptr;
 }
 
@@ -151,6 +162,10 @@ Cat& Cat::operator=(Cat&& src) {
 		this->_age = src._age;
 		strcpy(this->_name, src._name);
 
+		//=================================================//
+		// Dynamically allocate memory for _breed (char*)  //
+		// of the current object (*this).                  //
+		//=================================================//
 		this->_breed = new (std::nothrow) char[strlen(src._breed) + 1];
 		strcpy(this->_breed, src._breed);
 
@@ -162,6 +177,9 @@ Cat& Cat::operator=(Cat&& src) {
 	return *this;
 }
 
+//================//
+// The setter.    //
+//================//
 void Cat::setTheCat(int a, const char* n, const char* b) {
 	_age = a;
 	strncpy(_name, n, MAX_SIZE + 1);
