@@ -28,54 +28,45 @@
 #include <new>
 
 Cat::Cat() {
-	age = 0;
-	name[0] = '\0';
-	breed = nullptr;
+	_age = 0;
+	_name[0] = '\0';
+	_breed = nullptr;
 }
 
 Cat::Cat(int a, const char* n, const char* b) {
 
-	breed = new (std::nothrow) char[strlen(b) + 1];
-	
+	_breed = new (std::nothrow) char[strlen(b) + 1];
+
 	if (a != 0 && n != NULL && b != nullptr) {
-		age = a;
-		strncpy(name, n, MAX_SIZE + 1);
-		strcpy(breed, b);
-	} else *this = Cat();
+		_age = a;
+		strncpy(_name, n, MAX_SIZE + 1);
+		strcpy(_breed, b);
+	}
+	else *this = Cat();
 
 }
 
 
 Cat::~Cat() {
-	delete[] breed;
-	breed = nullptr;	
+	delete[] _breed;
+	_breed = nullptr;
 }
 
-bool operator!=(const Cat& left, const Cat& right) {
-	bool condition;
-
-	if (((left.getAge() != right.getAge()) && (left.getName() != right.getName()) && (left.getBreed() != right.getBreed())))
-		condition = true;
-	else
-		condition = false;
-
-	return condition;
-}
 
 int Cat::getAge() const {
-	return age;
+	return _age;
 }
 
 const char* Cat::getName() const {
-	return name;
+	return _name;
 }
 
 const char* Cat::getBreed() const {
-	return breed;
+	return _breed;
 }
 
 std::ostream& Cat::read(std::ostream& os) const {
-	os << "Name: " << name << ", Age: " << age << ", Breed: " << breed << std::endl;
+	os << "Name: " << _name << ", age: " << _age << ", Breed: " << _breed << std::endl;
 
 	return os;
 }
@@ -99,39 +90,39 @@ std::istream& Cat::write(std::istream& is) {
 	is.getline(nm, sizeof(nm));
 
 
-	std::cout << "Its age: ";
+	std::cout << "Its _age: ";
 	is >> a;
 	std::cout << "Breed: ";
-	
+
 	is.ignore();
 	is.getline(br, sizeof(br));
 
 	setTheCat(a, nm, br);
 
 	return is;
-	
+
 }
 
 
 Cat::Cat(const Cat& src) {
-	
-	this->age = src.age;
-	
-	strcpy(this->name, src.name);
-	
-	this->breed = new (std::nothrow) char[strlen(src.breed) + 1];
-	strcpy(this->breed, src.breed);
-	
+
+	this->_age = src._age;
+
+	strcpy(this->_name, src._name);
+
+	this->_breed = new (std::nothrow) char[strlen(src._breed) + 1];
+	strcpy(this->_breed, src._breed);
+
 }
 
 Cat& Cat::operator=(Cat& src) {
 	if (this != &src) {
-		this->age = src.age;
-	
-		strcpy(this->name, src.name);
-	
-		this->breed = new (std::nothrow) char[strlen(src.breed) + 1];
-		strcpy(this->breed, src.breed);
+		this->_age = src._age;
+
+		strcpy(this->_name, src._name);
+
+		this->_breed = new (std::nothrow) char[strlen(src._breed) + 1];
+		strcpy(this->_breed, src._breed);
 	}
 
 	return *this;
@@ -139,46 +130,47 @@ Cat& Cat::operator=(Cat& src) {
 
 
 Cat::Cat(Cat&& src) {
-	this->age = src.age;
-	strcpy(this->name, src.name);
-	
-	this->breed = new (std::nothrow) char[strlen(src.breed) + 1];
-	strcpy(this->breed, src.breed);
-	
-	src.age = 0;
-	src.name[0] = '\0';
-	src.breed = nullptr;
+	this->_age = src._age;
+	strcpy(this->_name, src._name);
+
+	this->_breed = new (std::nothrow) char[strlen(src._breed) + 1];
+	strcpy(this->_breed, src._breed);
+
+	src._age = 0;
+	src._name[0] = '\0';
+	src._breed = nullptr;
 }
 
 Cat& Cat::operator=(Cat&& src) {
 	if (this != &src) {
-		if (this->breed != nullptr) {
-			delete[] this->breed;
-			this->age = 0;
-			this->name[0] = '\0';
+		if (this->_breed != nullptr) {
+			delete[] this->_breed;
+
+			this->_age = 0;
+			this->_name[0] = '\0';
 		} // End of the nested if statement.
-		
-		this->age = src.age;
-		strcpy(this->name, src.name);
-		
-		this->breed = new (std::nothrow) char[strlen(src.breed) + 1];
-		strcpy(this->breed, src.breed);
-		
-		src.age = 0;
-		src.name = '\0';
-		src.breed = nullptr;
+
+		this->_age = src._age;
+		strcpy(this->_name, src._name);
+
+		this->_breed = new (std::nothrow) char[strlen(src._breed) + 1];
+		strcpy(this->_breed, src._breed);
+
+		src._age = 0;
+		src._name[0] = '\0';
+		src._breed = nullptr;
 	} // End of the if statement.
-	
+
 	return *this;
 }
 
 void Cat::setTheCat(int a, const char* n, const char* b) {
-	age = a;
-	strncpy(name, n, MAX_SIZE + 1);
+	_age = a;
+	strncpy(_name, n, MAX_SIZE + 1);
 
-	breed = new (std::nothrow) char[strlen(b) + 1];
-	if (b != NULL)
-		strcpy(breed, b);
+	_breed = new (std::nothrow) char[strlen(b) + 1];
+	if (b != nullptr)
+		strcpy(_breed, b);
 }
 
 
