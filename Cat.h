@@ -32,12 +32,13 @@ class Cat {
 
 	public:
 		Cat();
-		Cat(int, const char*, const char*);
+		Cat(int, const char*, const char*, const std::string&);
 		~Cat();
 
 		//====================//
 		// Accessors.         //
 		//====================//
+		const std::string& getOwnerName() const;
 		int getAge() const;
 		const char* getName() const;
 		const char* getBreed() const;
@@ -79,8 +80,7 @@ class Cat {
 		// Mutators: Needed for the copy //
 		// and assignment operators.     //
 		//===============================//
-		void setTheCat(int, const char*, const char*);
-		
+		void setTheCat(int, const char*, const char*, const std::string&);
 }; // End of the class.
 
 //================================//
