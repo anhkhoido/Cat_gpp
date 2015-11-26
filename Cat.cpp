@@ -19,6 +19,9 @@
 //                                           copy constructor and move assignment
 //                                           operator. All of these now send the data
 //                                           of their parameter to pointer *this.
+//
+// Anh Khoi Do      11/26/2015   4           Adding the update of the header in the
+//					     implementation file.
 //======================================================================================
 
 #include "Cat.h"
@@ -29,12 +32,13 @@ Cat::Cat() {
 	_age = 0;
 	_name[0] = '\0';
 	_breed = nullptr;
+	_ownerName = "";
 }
 
-Cat::Cat(int a, const char* n, const char* b) {
+Cat::Cat(int a, const char* n, const char* b, const std::string& n) {
 
 	
-	if (a != 0 && n != NULL && b != nullptr) {
+	if (a != 0 && n != NULL && b != nullptr && n != "") {
 		_age = a;
 		strncpy(_name, n, MAX_SIZE + 1);
 		
@@ -43,6 +47,8 @@ Cat::Cat(int a, const char* n, const char* b) {
 		//====================================================//
 		_breed = new (std::nothrow) char[strlen(b) + 1];
 		strcpy(_breed, b);
+		
+		_ownerName = n;
 	} else *this = Cat();
 
 }
@@ -61,6 +67,9 @@ Cat::~Cat() {
 	_breed = nullptr;
 }
 
+const std::string& Cat::getOwnerName() const {
+	return _ownerName;
+}
 
 int Cat::getAge() const {
 	return _age;
@@ -75,7 +84,7 @@ const char* Cat::getBreed() const {
 }
 
 std::ostream& Cat::read(std::ostream& os) const {
-	os << "Name: " << _name << ", age: " << _age << ", Breed: " << _breed << std::endl;
+	os << "Name: " << _name << ", age: " << _age << ", Breed: " << _breed << ", Owner: " << _ownerName << std::endl;
 
 	return os;
 }
@@ -89,6 +98,7 @@ std::istream& Cat::write(std::istream& is) {
 	//=======================//
 	char nm[50], br[50];
 	int a;
+	std::string owName;
 
 	//================================//
 	// This input can be with spaces. //
@@ -106,7 +116,10 @@ std::istream& Cat::write(std::istream& is) {
 	is.ignore();
 	is.getline(br, sizeof(br));
 
-	setTheCat(a, nm, br);
+	std::cout << "The name of its owner: ";
+	getline(is, owName);
+
+	setTheCat(a, nm, br, owName);
 
 	return is;
 
@@ -121,6 +134,8 @@ Cat::Cat(const Cat& src) {
 
 	this->_breed = new (std::nothrow) char[strlen(src._breed) + 1];
 	strcpy(this->_breed, src._breed);
+	
+	this->_ownerName = src._ownerName;
 
 }
 
@@ -132,6 +147,8 @@ Cat& Cat::operator=(Cat& src) {
 
 		this->_breed = new (std::nothrow) char[strlen(src._breed) + 1];
 		strcpy(this->_breed, src._breed);
+		
+		this->_ownerName = src._ownerName;
 	}
 
 	return *this;
@@ -141,13 +158,16 @@ Cat& Cat::operator=(Cat& src) {
 Cat::Cat(Cat&& src) {
 	this->_age = src._age;
 	strcpy(this->_name, src._name);
-
+	
 	this->_breed = new (std::nothrow) char[strlen(src._breed) + 1];
 	strcpy(this->_breed, src._breed);
+
+	this->_ownerName = src._ownerName;
 
 	src._age = 0;
 	src._name[0] = '\0';
 	src._breed = nullptr;
+	src._ownerName = "";
 }
 
 Cat& Cat::operator=(Cat&& src) {
@@ -172,6 +192,7 @@ Cat& Cat::operator=(Cat&& src) {
 		src._age = 0;
 		src._name[0] = '\0';
 		src._breed = nullptr;
+		src._ownerName = "";
 	} // End of the if statement.
 
 	return *this;
@@ -180,13 +201,15 @@ Cat& Cat::operator=(Cat&& src) {
 //================//
 // The setter.    //
 //================//
-void Cat::setTheCat(int a, const char* n, const char* b) {
+void Cat::setTheCat(int a, const char* n, const char* b, const std::string& on) {
 	_age = a;
 	strncpy(_name, n, MAX_SIZE + 1);
 
 	_breed = new (std::nothrow) char[strlen(b) + 1];
 	if (b != nullptr)
 		strcpy(_breed, b);
+		
+	_ownerName = on;
 }
 
 
