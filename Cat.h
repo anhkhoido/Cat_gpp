@@ -13,6 +13,9 @@
 //
 // Anh Khoi Do     09/10/2015    2           Addition of a move copy constructor
 //                                           and a move assignment operator.
+//
+// Anh Khoi Do     11/26/2015    3           Addition of an std::string as a private
+//					     data member, which is the owner's name.
 //=======================================================================================
 
 #include <iostream>
@@ -24,6 +27,7 @@ class Cat {
 	int _age;
 	char _name[MAX_SIZE + 1];
 	char* _breed;
+	std::string _ownerName;
 	
 
 	public:
